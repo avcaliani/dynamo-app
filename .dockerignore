@@ -1,0 +1,19 @@
+# Python
+venv
+.venv
+.python-version
+.pytest_cache
+.coverage
+__pycache__/
+
+# IDEs
+.idea/
+.vscode/
+
+# Git
+.git/
+.gitignore
+
+# Other Stuff
+docker-compose.yml
+README.md
