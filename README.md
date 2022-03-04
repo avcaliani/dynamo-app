@@ -1,4 +1,4 @@
-# Dynamo App
+# 🦖 Dynamo App
 
 ![#](https://img.shields.io/badge/python-3.10.x-yellow.svg)
 
