@@ -36,21 +36,19 @@ class DynamoFacade:
             parse_float=Decimal
         )
 
-    def get(self, table: str, id_: Optional[str] = None, id_field: str = 'document') -> Union[dict, list, None]:
+    def get(self, table: str, id_: Optional[str] = None, id_field: str = 'document') -> Union[dict, list]:
         table = self.conn.Table(table)
         if not id_:
             return table.scan().get("Items", [])
-        return table.get_item(Key={id_field: id_}).get("Item", None)
+        return table.get_item(Key={id_field: id_}).get("Item", {})
 
     def create(self, table: str, data: BaseModel) -> dict:
         table = self.conn.Table(table)
         return table.put_item(Item=self.to_dict(data))
 
-    def update(self, table: str, id_: str, data: BaseModel):
-        raise RuntimeError("Not implemented!")
-
-    def delete(self, table: str, id_: str):
-        raise RuntimeError("Not implemented!")
+    def delete(self, table: str, id_: Optional[str] = None, id_field: str = 'document'):
+        table = self.conn.Table(table)
+        return table.delete_item(Key={id_field: id_})
 
 
 db = DynamoFacade()

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 
 from app.models import User
 from app.utils import db
@@ -30,7 +30,4 @@ async def update(document: str, data: User):
 
 @user.delete("/{document}")
 async def delete(document: str):
-    try:
-        return db.delete(table=DYNAMO_TABLE, id_=document)
-    except RuntimeError as ex:
-        raise HTTPException(status_code=404, detail=str(ex))
+    return db.delete(table=DYNAMO_TABLE, id_=document)
