@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 
+from app import routers
+
 app = FastAPI(
     title="🦖 Dynamo App",
     description="⚡️Fast API + 🦖 DynamoDB",
@@ -11,6 +13,9 @@ app = FastAPI(
     },
     license_info={"name": "MIT License", "url": "https://opensource.org/licenses/MIT"},
 )
+
+# 👇 Routers
+app.include_router(routers.user)
 
 
 @app.get("/")
